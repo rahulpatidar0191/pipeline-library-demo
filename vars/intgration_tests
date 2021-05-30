@@ -1,0 +1,14 @@
+node {
+  stage('Checkout'){
+    checkout scm
+  }
+	stage('Run integration tests'){
+		dir('Storefront/integration_tests/'){	 
+		    docker.image('circleci/node:12.13-browsers').inside{
+			 sh 'yarn install'
+			  sh 'yarn cypress install'
+			// sh ' yarn cy:run'
+		    }
+		 }
+	   }
+}
