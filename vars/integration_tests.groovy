@@ -1,4 +1,4 @@
-def integration_tests(String name = 'directory') {
+def call(String name = 'directory') {
  	dir('Storefront/integration_tests/'){	 
 	   docker.image('circleci/node:12.13-browsers').inside{
 		sh 'yarn install'
