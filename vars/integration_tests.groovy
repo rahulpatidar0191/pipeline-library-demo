@@ -1,5 +1,5 @@
 def integration_tests(String name = 'directory') {
- 	dir(${name}){	 
+ 	dir('Storefront/integration_tests/'){	 
 	   docker.image('circleci/node:12.13-browsers').inside{
 		sh 'yarn install'
 		sh 'yarn cypress install'
