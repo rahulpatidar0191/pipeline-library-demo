@@ -15,7 +15,7 @@ def call(directory) {
             // to record we need to set an environment variable
             // we can load the record key variable from credentials store
             // see https://jenkins.io/doc/book/using/using-credentials/
-            CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
+            CYPRESS_RECORD_KEY = '5edfee75-c874-466c-b96c-3a457f8eca5c'
             // because parallel steps share the workspace they might race to delete
             // screenshots and videos folders. Tell Cypress not to delete these folders
             CYPRESS_trashAssetsBeforeRuns = 'false'
