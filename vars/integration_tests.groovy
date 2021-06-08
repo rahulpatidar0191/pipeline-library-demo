@@ -1,4 +1,4 @@
-def call(directory) {
+def name(directory) {
    node {
      stage('tests') {
         dir(directory) {
