@@ -2,7 +2,7 @@ def call(app_name) {
   // node {
   stage('tests') {
      dir(app_name) {
-       docker.image('node:12'){
+       docker.image('node:12').inside {
              echo app_name
              sh 'yarn install'
          }
