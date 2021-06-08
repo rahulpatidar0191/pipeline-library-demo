@@ -1,8 +1,8 @@
-def name_one(directory) {
+def name_one(app_name:str) {
    node {
      stage('tests') {
         dir(directory) {
-          echo directory
+          echo app_name
         }
      }
   }
