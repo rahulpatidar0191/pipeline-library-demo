@@ -1,11 +1,11 @@
 def call(app_name) {
-   node {
+  // node {
      stage('tests') {
-        dir(directory) {
+        //dir(app_name) {
           echo app_name
-        }
+       // }
      }
-  }
+  //}
 }     
 
 
