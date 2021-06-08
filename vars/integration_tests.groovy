@@ -2,8 +2,8 @@ def call(app_name,npm_token) {
   stage('tests') {
      dir(app_name) {
        docker.image('node:12').inside {
-         withCredentials([string(credentialsId: npm_token, usernameVariable: 'NPM_TOKEN')]) {
-            echo NPM_TOKEN
+         withCredentials([string(credentialsId: npm_token, variable: 'NPM_TOKEN')]) {
+            echo $NPM_TOKEN
          }
         }
      }
