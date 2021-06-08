@@ -1,4 +1,4 @@
-def call(app_name,npm-token) {
+def call(app_name,npm_token) {
   // node {
   stage('tests') {
 //     environment {
@@ -8,7 +8,7 @@ def call(app_name,npm-token) {
 //    }
      dir(app_name) {
        docker.image('node:12').inside {
-         withCredentials([string(credentialsId: npm-token, usernameVariable: 'NPM_TOKEN')]) {
+         withCredentials([string(credentialsId: npm_token, usernameVariable: 'NPM_TOKEN')]) {
             echo NPM_TOKEN
              //echo app_name
             // sh 'yarn install'
