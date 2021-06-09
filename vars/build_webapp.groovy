@@ -4,6 +4,7 @@ def server(Map pipelineParams) {
         checkout scm
       }
      stage('Build Docker') {
+        sh 'docker-compose -f dockerfiles[1] -f dockerfiles[2] up -d'
         echo pipelineParams.dockerfiles[0]
       }
     }
