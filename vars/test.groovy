@@ -9,7 +9,7 @@ def server(Map pipelineParams) {
           echo 'Building docker image ...'
           def registry = 'docker.satel.ca'
           env.REGISTRY = 'docker.satel.ca'
-          echo 'registry'
+          echo registry
           def credentials = 'satel_bigbilly_registry'
           if (env.TAG_NAME != null) {
             registry = pipelineParams.registry
