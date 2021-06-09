@@ -4,7 +4,7 @@ def server(Map pipelineParams) {
         checkout scm
       }
      stage('Build Docker') {
-        sh 'pipelineParams.dockerfiles'
+        echo pipelineParams.dockerfiles[0]
       }
     }
 }
