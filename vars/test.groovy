@@ -17,13 +17,15 @@ def server(Map pipelineParams) {
             credentials = pipelineParams.credentials1
            
             }
-          docker.withRegistry('https://' + registry, credentials) {
-            //env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
-            //def customImage = docker.build(registry + "/pipelineParams.repo:${CLEAN_BRANCH_NAME}", './')
-              echo "Successsssss"
-            /* Push the container to DockerHub */
-            //customImage.push()
-          }
+           withCredentials([string(credentialsId: pipelineParams.credentials, variable: 'credentials')]) {
+              docker.withRegistry('https://' + registry, credentials) {
+                //env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
+                //def customImage = docker.build(registry + "/pipelineParams.repo:${CLEAN_BRANCH_NAME}", './')
+                  echo credentials
+                /* Push the container to DockerHub */
+                //customImage.push()
+              }
+           }
       }
     }
 }
