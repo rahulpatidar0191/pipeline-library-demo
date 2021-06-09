@@ -9,7 +9,7 @@ def server(Map pipelineParams) {
           echo 'Building docker image ...'
           def registry = 'docker.satel.ca'
           env.REGISTRY = 'docker.satel.ca'
-         // def credentials = pipelineParams.credentials
+          def credentials = pipelineParams.credentials
          // echo credentials
           if (env.TAG_NAME != null) {
             registry = pipelineParams.registry
@@ -17,16 +17,15 @@ def server(Map pipelineParams) {
             credentials = pipelineParams.credentials1
            
             }
-           withCredentials([string(credentialsId: pipelineParams.credentials, variable: 'credentials')]) {
+          // withCredentials([string(credentialsId: pipelineParams.credentials, variable: 'credentials')]) {
                echo credentials
               //docker.withRegistry('https://' + registry, credentials) {
                 //env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
                 //def customImage = docker.build(registry + "/pipelineParams.repo:${CLEAN_BRANCH_NAME}", './')
-                  echo credentials
                 /* Push the container to DockerHub */
                 //customImage.push()
              // }
-           }
+          // }
       }
     }
 }
