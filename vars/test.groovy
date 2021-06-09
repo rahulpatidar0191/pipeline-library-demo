@@ -10,11 +10,11 @@ def server(Map pipelineParams) {
           def registry = 'docker.satel.ca'
           env.REGISTRY = 'docker.satel.ca'
           echo registry
-          def credentials = 'satel_bigbilly_registry'
+          def credentials = pipelineParams.credentials
           if (env.TAG_NAME != null) {
             registry = pipelineParams.registry
             env.REGISTRY = pipelineParams.registry
-            credentials = pipelineParams.credentials
+            credentials = pipelineParams.credentials1
               echo 'registry'
               echo 'credentials'
               
