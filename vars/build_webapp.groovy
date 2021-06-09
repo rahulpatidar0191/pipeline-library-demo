@@ -5,7 +5,7 @@ def server(Map pipelineParams) {
       }
      stage('Build Docker') {
          echo '$pipelineParams.dockerfiles[1]'
-        sh "echo 'docker-compose -f $pipelineParams.dockerfiles[1] -f $pipelineParams.dockerfiles[2] up -d'"
+         sh "echo 'docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d'"
        // echo pipelineParams.dockerfiles[0]
       }
     }
