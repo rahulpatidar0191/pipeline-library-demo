@@ -12,6 +12,7 @@ def server(Map pipelineParams) {
           echo registry
           def credentials = pipelineParams.credentials
           echo credentials
+          echo env.CLEAN_BRANCH_NAME
 //           if (env.TAG_NAME != null) {
 //             registry = pipelineParams.registry
 //             env.REGISTRY = pipelineParams.registry
