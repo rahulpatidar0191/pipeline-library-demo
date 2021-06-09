@@ -1,12 +1,39 @@
 def call(Map pipelineParams) {
-    docker.image('node:12').inside {
-        stage('tests') {
-            withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
-                echo token
+    withEnv([ 'CI = true', 'PUBLIC_URL = %PUBLIC_URL%']) {
+        docker.image('node:12').inside {
+            stage('tests') {
+                withCredentials([string(credentialsId: pipelineParams.npm_token, NPM_TOKEN: 'npm_token')]) {
+                    stage('Install Dependencies') {
+                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
+                        sh 'cd client; yarn install'
+                    }
+                    stage('Lint') {
+                        sh 'cd client; yarn lint'
+                    }
+                    stage('Test') {
+                        sh 'cd client; yarn test'
+                    }
+                    stage('Build') {
+                        sh 'cd client; yarn build'
+                    }
+                }
             }
         }
     }
 }
+
+
+
+
+// def call(Map pipelineParams) {
+//     docker.image('node:12').inside {
+//         stage('tests') {
+//             withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
+//                 echo token
+//             }
+//         }
+//     }
+// }
 
 
 
