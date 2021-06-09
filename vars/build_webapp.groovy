@@ -24,7 +24,7 @@ def server(Map pipelineParams) {
 //       }
       try {
         stage('Docker up') {
-          sh 'docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d'
+          sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
         }
         stage('Linting check') {
           sh 'docker-compose exec -T webapp flake8'
