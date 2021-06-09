@@ -1,4 +1,4 @@
-def call(Map pipelineParams) {
+def client(Map pipelineParams) {
     pipeline {
       agent {
         docker {
