@@ -46,20 +46,21 @@ def client(Map pipelineParams) {
     withEnv([ 'CI = true', 'PUBLIC_URL = %PUBLIC_URL%']) {
         docker.image('node:12').inside {
             stage('tests') {
-                withCredentials([string(credentialsId: pipelineParams.token, variable: 'NPMTOKEN')]) {
+                withCredentials([string(credentialsId: 'token', variable: 'NPMTOKEN')]) {
                     stage('Install Dependencies') {
-                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
-                        sh 'cd client; yarn install'
+                        echo "$NPMTOKEN
+//                         sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
+//                         sh 'cd client; yarn install'
                     }
-                    stage('Lint') {
-                        sh 'cd client; yarn lint'
-                    }
-                    stage('Test') {
-                        sh 'cd client; yarn test'
-                    }
-                    stage('Build') {
-                        sh 'cd client; yarn build'
-                    }
+//                     stage('Lint') {
+//                         sh 'cd client; yarn lint'
+//                     }
+//                     stage('Test') {
+//                         sh 'cd client; yarn test'
+//                     }
+//                     stage('Build') {
+//                         sh 'cd client; yarn build'
+//                     }
                 }
             }
         }
