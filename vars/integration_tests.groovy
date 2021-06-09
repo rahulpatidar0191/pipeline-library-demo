@@ -29,7 +29,7 @@ def call(Map pipelineParams) {
     docker.image('node:12').inside {
         stage('tests') {
             withCredentials([string(credentialsId: pipelineParams.token, variable: 'TOKEN')]) {
-                echo '$TOKEN'
+                echo "Token: $TOKEN"
             }
         }
     }
