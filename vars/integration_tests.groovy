@@ -1,14 +1,26 @@
 def call(Map pipelineParams) {
-  stage('tests') {
-     dir(pipelineParams.dir) {
-       docker.image('node:12').inside {
-         withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
-            echo token
-         }
+    docker.image('node:12').inside {
+        stage('tests') {
+            withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
+                echo token
+            }
         }
-     }
-  }
-}  
+    }
+}
+
+
+
+// def call(Map pipelineParams) {
+//   stage('tests') {
+//      dir(pipelineParams.dir) {
+//        docker.image('node:12').inside {
+//          withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
+//             echo token
+//          }
+//         }
+//      }
+//   }
+// }  
 
 
 
