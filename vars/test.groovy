@@ -13,6 +13,7 @@ def server(Map pipelineParams) {
           def credentials = pipelineParams.credentials
           echo credentials
           echo env.CLEAN_BRANCH_NAME
+          echo 'https://' + registry, credentials
 //           if (env.TAG_NAME != null) {
 //             registry = pipelineParams.registry
 //             env.REGISTRY = pipelineParams.registry
