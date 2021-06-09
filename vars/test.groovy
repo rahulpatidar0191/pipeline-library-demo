@@ -18,13 +18,14 @@ def server(Map pipelineParams) {
            
             }
            withCredentials([string(credentialsId: pipelineParams.credentials, variable: 'credentials')]) {
-              docker.withRegistry('https://' + registry, credentials) {
+               echo credentials
+              //docker.withRegistry('https://' + registry, credentials) {
                 //env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
                 //def customImage = docker.build(registry + "/pipelineParams.repo:${CLEAN_BRANCH_NAME}", './')
                   echo credentials
                 /* Push the container to DockerHub */
                 //customImage.push()
-              }
+             // }
            }
       }
     }
