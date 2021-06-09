@@ -1,70 +1,70 @@
-def call(Map pipelineParams) {
-    pipeline {
-      agent {
-        docker {
-          image 'node:12'
-        }
-      }
-      environment {
-        NPM_TOKEN = credentials('npm-token')
-        CI = 'true'
-        PUBLIC_URL = '%PUBLIC_URL%'
-      }
-      stages {
-        stage('Install Dependencies') {
-          steps {
-            /* groovylint-disable-next-line GStringExpressionWithinString */
-            sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
-            sh 'cd client; yarn install'
-          }
-        }
-        stage('Lint') {
-          steps {
-            sh 'cd client; yarn lint'
-          }
-        }
-        stage('Test') {
-          steps {
-            sh 'cd client; yarn test'
-          }
-        }
-        stage('Build') {
-          steps {
-            sh 'cd client; yarn build'
-          }
-        }
-      }
-    }
-}
-
-
-
-
-
-
 // def call(Map pipelineParams) {
-//     withEnv([ 'CI = true', 'PUBLIC_URL = %PUBLIC_URL%']) {
-//         docker.image('node:12').inside {
-//             stage('tests') {
-//                 withCredentials([string(credentialsId: pipelineParams.token, variable: 'NPMTOKEN')]) {
-//                     stage('Install Dependencies') {
-//                         sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
-//                         sh 'cd client; yarn install'
-//                     }
-//                     stage('Lint') {
-//                         sh 'cd client; yarn lint'
-//                     }
-//                     stage('Test') {
-//                         sh 'cd client; yarn test'
-//                     }
-//                     stage('Build') {
-//                         sh 'cd client; yarn build'
-//                     }
-//                 }
-//             }
+//     pipeline {
+//       agent {
+//         docker {
+//           image 'node:12'
 //         }
+//       }
+//       environment {
+//         NPM_TOKEN = credentials('npm-token')
+//         CI = 'true'
+//         PUBLIC_URL = '%PUBLIC_URL%'
+//       }
+//       stages {
+//         stage('Install Dependencies') {
+//           steps {
+//             /* groovylint-disable-next-line GStringExpressionWithinString */
+//             sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
+//             sh 'cd client; yarn install'
+//           }
+//         }
+//         stage('Lint') {
+//           steps {
+//             sh 'cd client; yarn lint'
+//           }
+//         }
+//         stage('Test') {
+//           steps {
+//             sh 'cd client; yarn test'
+//           }
+//         }
+//         stage('Build') {
+//           steps {
+//             sh 'cd client; yarn build'
+//           }
+//         }
+//       }
 //     }
 // }
+
+
+
+
+
+
+def client(Map pipelineParams) {
+    withEnv([ 'CI = true', 'PUBLIC_URL = %PUBLIC_URL%']) {
+        docker.image('node:12').inside {
+            stage('tests') {
+                withCredentials([string(credentialsId: pipelineParams.token, variable: 'NPMTOKEN')]) {
+                    stage('Install Dependencies') {
+                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
+                        sh 'cd client; yarn install'
+                    }
+                    stage('Lint') {
+                        sh 'cd client; yarn lint'
+                    }
+                    stage('Test') {
+                        sh 'cd client; yarn test'
+                    }
+                    stage('Build') {
+                        sh 'cd client; yarn build'
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 
