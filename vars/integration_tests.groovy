@@ -4,7 +4,7 @@ def call(Map pipelineParams) {
             stage('tests') {
                 withCredentials([string(credentialsId: pipelineParams.npm_token, variable: 'NPMTOKEN')]) {
                     stage('Install Dependencies') {
-                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
+                       // sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
                         sh 'cd client; yarn install'
                     }
                     stage('Lint') {
