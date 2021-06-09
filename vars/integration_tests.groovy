@@ -1,41 +1,40 @@
 def call(Map pipelineParams) {
-    /* groovylint-disable-next-line CompileStatic */
-pipeline {
-  agent {
-    docker {
-      image 'node:12'
-    }
-  }
-  environment {
-    NPM_TOKEN = credentials('npm-token')
-    CI = 'true'
-    PUBLIC_URL = '%PUBLIC_URL%'
-  }
-  stages {
-    stage('Install Dependencies') {
-      steps {
-        /* groovylint-disable-next-line GStringExpressionWithinString */
-        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
-        sh 'cd client; yarn install'
+    pipeline {
+      agent {
+        docker {
+          image 'node:12'
+        }
+      }
+      environment {
+        NPM_TOKEN = credentials('npm-token')
+        CI = 'true'
+        PUBLIC_URL = '%PUBLIC_URL%'
+      }
+      stages {
+        stage('Install Dependencies') {
+          steps {
+            /* groovylint-disable-next-line GStringExpressionWithinString */
+            sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
+            sh 'cd client; yarn install'
+          }
+        }
+        stage('Lint') {
+          steps {
+            sh 'cd client; yarn lint'
+          }
+        }
+        stage('Test') {
+          steps {
+            sh 'cd client; yarn test'
+          }
+        }
+        stage('Build') {
+          steps {
+            sh 'cd client; yarn build'
+          }
+        }
       }
     }
-    stage('Lint') {
-      steps {
-        sh 'cd client; yarn lint'
-      }
-    }
-    stage('Test') {
-      steps {
-        sh 'cd client; yarn test'
-      }
-    }
-    stage('Build') {
-      steps {
-        sh 'cd client; yarn build'
-      }
-    }
-  }
-}
 }
 
 
