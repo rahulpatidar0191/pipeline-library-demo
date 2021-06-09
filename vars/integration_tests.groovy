@@ -2,8 +2,8 @@ def call(Map pipelineParams) {
   stage('tests') {
      dir(pipelineParams.dir) {
        docker.image('node:12').inside {
-         withCredentials([string(credentialsId: pipelineParams.token, variable: 'NPM_TOKEN')]) {
-            echo $NPM_TOKEN
+         withCredentials([string(credentialsId: pipelineParams.token, variable: 'token')]) {
+            echo token
          }
         }
      }
