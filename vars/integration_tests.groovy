@@ -2,9 +2,9 @@ def call(Map pipelineParams) {
     withEnv([ 'CI = true', 'PUBLIC_URL = %PUBLIC_URL%']) {
         docker.image('node:12').inside {
             stage('tests') {
-                withCredentials([string(credentialsId: pipelineParams.npm_token, NPM_TOKEN: 'npm_token')]) {
+                withCredentials([string(credentialsId: pipelineParams.npm_token, NPMTOKEN: 'npm_token')]) {
                     stage('Install Dependencies') {
-                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc'
+                        sh 'cd client; echo "//registry.npmjs.org/:_authToken=\${NPMTOKEN}" > .npmrc'
                         sh 'cd client; yarn install'
                     }
                     stage('Lint') {
