@@ -4,24 +4,24 @@ def server(Map pipelineParams) {
         checkout scm
       }
 
-      stage('Build Docker') {
-          echo 'Building docker image ...'
-          def registry = pipelineParams.production_registry_host_satel
-          env.REGISTRY = pipelineParams.production_registry_host_satel
-          def credentials = pipelineParams.production_registry_creds_satel
-          if (env.TAG_NAME != null) {
-            registry = pipelineParams.production_registry_host_client
-            env.REGISTRY = pipelineParams.production_registry_host_client
-            credentials = pipelineParams.production_registry_creds_client
-          }
-          docker.withRegistry('https://' + registry, credentials) {
+//       stage('Build Docker') {
+//           echo 'Building docker image ...'
+//           def registry = pipelineParams.production_registry_host_satel
+//           env.REGISTRY = pipelineParams.production_registry_host_satel
+//           def credentials = pipelineParams.production_registry_creds_satel
+//           if (env.TAG_NAME != null) {
+//             registry = pipelineParams.production_registry_host_client
+//             env.REGISTRY = pipelineParams.production_registry_host_client
+//             credentials = pipelineParams.production_registry_creds_client
+//           }
+//           docker.withRegistry('https://' + registry, credentials) {
 
-            env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
-            def customImage = docker.build(registry + "/${pipelineParams.appname}:${CLEAN_BRANCH_NAME}", './')
-            /* Push the container to DockerHub */
-            customImage.push()
-          }
-      }
+//             env.CLEAN_BRANCH_NAME = BRANCH_NAME.replace('/', '_')
+//             def customImage = docker.build(registry + "/${pipelineParams.appname}:${CLEAN_BRANCH_NAME}", './')
+//             /* Push the container to DockerHub */
+//             customImage.push()
+//           }
+//       }
       try {
         stage('Docker up') {
           sh 'docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d'
