@@ -1,4 +1,4 @@
-def call(Map pipelineParams) {
+def server(Map pipelineParams) {
 
     node {
         stage('Checkout'){
