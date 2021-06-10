@@ -25,7 +25,7 @@ def server(Map pipelineParams) {
       try {
         stage('Docker up') {
           //sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
-           echo ""docker stack deploy --with-registry-auth -c ${pipelineParams.dockerfiles[3]} ${pipelineParams.appName}"
+           echo "docker stack deploy --with-registry-auth -c ${pipelineParams.dockerfiles[3]} ${pipelineParams.appName}"
            
         }
 //         stage('Linting check') {
