@@ -22,6 +22,7 @@ def server(Map pipelineParams) {
             customImage.push()
           }
       }
+   }
 //       try {
 //         stage('Docker up') {
 //           //sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
