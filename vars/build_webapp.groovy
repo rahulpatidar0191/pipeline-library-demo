@@ -5,10 +5,10 @@ def server(Map pipelineParams) {
       }
 
 
-      try {
-        stage('Docker up') {
-          //sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
-           //echo "docker stack deploy --with-registry-auth -c ${pipelineParams.dockerfiles[3]} ${pipelineParams.appName}"
+//       try {
+//         stage('Docker up') {
+//           //sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
+//            //echo "docker stack deploy --with-registry-auth -c ${pipelineParams.dockerfiles[3]} ${pipelineParams.appName}"
            
         stage('Code tests') {
           sh '''
@@ -31,14 +31,14 @@ def server(Map pipelineParams) {
                exit $TOTAL
          '''
         }
-      }
-      catch (exc) {
-        echo 'The validation failed'
-        currentBuild.result = 'FAILURE'
-        if (BRANCH_NAME == 'main') {
-          slackSend channel: '#shape-pim', message: '@here The latest Jenkins job on the main branch of the Shape PIM FAILED.', teamDomain: 'satel', tokenCredentialId: 'slack-token', username: 'Jenkins'
-        }
-      }
+    //  }
+//       catch (exc) {
+//         echo 'The validation failed'
+//         currentBuild.result = 'FAILURE'
+//         if (BRANCH_NAME == 'main') {
+//           slackSend channel: '#shape-pim', message: '@here The latest Jenkins job on the main branch of the Shape PIM FAILED.', teamDomain: 'satel', tokenCredentialId: 'slack-token', username: 'Jenkins'
+//         }
+   //   }
     }
 }
 
