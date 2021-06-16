@@ -6,7 +6,7 @@ def call() {
       }
        stage('Code tests') {
           sh '''
-                # Catch the exit codes so we don't exit the whole script before we are done.
+                echo "Catch the exit codes so we don't exit the whole script before we are done."
 
                # Typing check
                docker-compose exec -T webapp mypy . --junit-xml typing.xml; STATUS1=$?
