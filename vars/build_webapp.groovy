@@ -1,4 +1,4 @@
-def call(Map pipelineParams) {    
+def call() {    
    node {
       stage('Checkout'){
         checkout scm
