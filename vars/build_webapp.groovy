@@ -36,14 +36,13 @@ def call() {
 
 
 
-/*
 
 
-def call() {    
-   node {
-      stage('Checkout'){
-        checkout scm
-      }
+// def call() {    
+//    node {
+//       stage('Checkout'){
+//         checkout scm
+//       }
 
 
 //       try {
@@ -51,27 +50,27 @@ def call() {
 //           //sh "docker-compose -f ${pipelineParams.dockerfiles[1]} -f ${pipelineParams.dockerfiles[2]} up -d"
 //            //echo "docker stack deploy --with-registry-auth -c ${pipelineParams.dockerfiles[3]} ${pipelineParams.appName}"
            
-        stage('Code tests') {
-          sh '''
-                # Catch the exit codes so we don't exit the whole script before we are done.
+//         stage('Code tests') {
+//           sh '''
+//                 # Catch the exit codes so we don't exit the whole script before we are done.
 
-               # Typing check
-               docker-compose exec -T webapp mypy . --junit-xml typing.xml; STATUS1=$?
+//                # Typing check
+//                docker-compose exec -T webapp mypy . --junit-xml typing.xml; STATUS1=$?
 
-               docker cp "$(docker-compose ps -q webapp)":/python/app/typing.xml typing.xml
+//                docker cp "$(docker-compose ps -q webapp)":/python/app/typing.xml typing.xml
 
-               # Unit and integration testing
-               docker-compose exec -T webapp ./RunTest.sh; STATUS2=$?
+//                # Unit and integration testing
+//                docker-compose exec -T webapp ./RunTest.sh; STATUS2=$?
 
-               docker cp "$(docker-compose ps -q webapp)":/python/app/unittesting.xml unittesting.xml
-               docker cp "$(docker-compose ps -q webapp)":/python/app/coverage.xml coverage.xml
+//                docker cp "$(docker-compose ps -q webapp)":/python/app/unittesting.xml unittesting.xml
+//                docker cp "$(docker-compose ps -q webapp)":/python/app/coverage.xml coverage.xml
 
-               # Return the status code of mypy
-               TOTAL=$((STATUS1 + STATUS2))
+//                # Return the status code of mypy
+//                TOTAL=$((STATUS1 + STATUS2))
 
-               exit $TOTAL
-         '''
-        }
+//                exit $TOTAL
+//          '''
+//         }
     //  }
 //       catch (exc) {
 //         echo 'The validation failed'
@@ -80,8 +79,8 @@ def call() {
 //           slackSend channel: '#shape-pim', message: '@here The latest Jenkins job on the main branch of the Shape PIM FAILED.', teamDomain: 'satel', tokenCredentialId: 'slack-token', username: 'Jenkins'
 //         }
    //   }
-    }
-}
+//     }
+// }
 
 // def server(Map pipelineParams) {
 //     node {
