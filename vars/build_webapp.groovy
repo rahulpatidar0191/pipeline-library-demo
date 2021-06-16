@@ -1,3 +1,44 @@
+
+def call() {    
+   node {
+      stage('Checkout'){
+        checkout scm
+      }
+       stage('Code tests') {
+          sh '''
+                # Catch the exit codes so we don't exit the whole script before we are done.
+
+               # Typing check
+               docker-compose exec -T webapp mypy . --junit-xml typing.xml; STATUS1=$?
+
+               docker cp "$(docker-compose ps -q webapp)":/python/app/typing.xml typing.xml
+
+               # Unit and integration testing
+               docker-compose exec -T webapp ./RunTest.sh; STATUS2=$?
+
+               docker cp "$(docker-compose ps -q webapp)":/python/app/unittesting.xml unittesting.xml
+               docker cp "$(docker-compose ps -q webapp)":/python/app/coverage.xml coverage.xml
+
+               # Return the status code of mypy
+               TOTAL=$((STATUS1 + STATUS2))
+
+               exit $TOTAL
+         '''
+        }
+   }
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 def call() {    
    node {
       stage('Checkout'){
@@ -86,3 +127,4 @@ def call() {
 //     }
 // }
 
+*/
